@@ -15,17 +15,17 @@ namespace InternetApp.Data.Repositories
             _context = context;
         }
 
-        public Article GetArticle(int id)
+        public Article GetArticle(int? id)
         {
             return _context.Articles.Find(id);
         }
 
         public List<Article> GetArticles()
         {
-            return _context.Articles.ToList();
+            return _context.Articles.OrderByDescending(a => a.Id).ToList();
         }
 
-        public async Task<bool> CreateArticle(Article article)
+        public async Task<bool> StoreArticle(Article article)
         {
             _context.Add(article);
             return await SaveChangesAsync();
@@ -33,13 +33,13 @@ namespace InternetApp.Data.Repositories
 
         public async Task<bool> UpdateArticle(Article article)
         {
-            _context.Articles.Update(article);
+            _context.Update(article);
             return await SaveChangesAsync();
         }
 
         public async Task<bool> DeleteArticle(int id)
         {
-            _context.Articles.Remove(GetArticle(id));
+            _context.Remove(GetArticle(id));
             return await SaveChangesAsync();
         }
 

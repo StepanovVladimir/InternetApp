@@ -22,7 +22,18 @@ namespace InternetApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var articles = _repository.GetArticles();
+            return View(articles);
+        }
+
+        public IActionResult Article(int? id)
+        {
+            var article = _repository.GetArticle(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
+            return View(article);
         }
 
         public IActionResult Create()
@@ -32,16 +43,48 @@ namespace InternetApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Article article)
+        public async Task<IActionResult> Store(Article article)
         {
             if (ModelState.IsValid)
             {
-                if (await _repository.CreateArticle(article))
+                if (await _repository.StoreArticle(article))
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Article", new { id = article.Id });
                 }
             }
+            return View("Create", article);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            var article = _repository.GetArticle(id);
+            if (article == null)
+            {
+                return NotFound();
+            }
             return View(article);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(Article article)
+        {
+            if (ModelState.IsValid)
+            {
+                if (await _repository.UpdateArticle(article))
+                {
+                    return RedirectToAction("Article", new { id = article.Id });
+                }
+            }
+            return View("Edit", article);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _repository.DeleteArticle(id);
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

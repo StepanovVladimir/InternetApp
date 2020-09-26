@@ -1,8 +1,22 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Article>
+
+@{
+    ViewData["Title"] = "Научно популярный сайт";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="col-lg-9 col-xl-10">
+    @foreach (var article in Model)
+    {
+        <div>
+            <a asp-action="Article" asp-route-id="@article.Id">@article.Title</a>
+            <img src="@article.Image" alt="@article.Title" class="post_image" />
+            <p>@article.Description</p>
+            <p>@article.CreatedAt.ToShortDateString()</p>
+            <a asp-action="Edit" asp-route-id="@article.Id" class="btn btn-primary post_btn">Редактировать</a>
+            <form asp-action="Delete" asp-route-id="@article.Id" class="post_btn">
+                <input type="submit" value="Удалить" class="btn btn-danger post_delete" />
+            </form>
+            <div class="clear"></div>
+        </div>
+    }
 </div>

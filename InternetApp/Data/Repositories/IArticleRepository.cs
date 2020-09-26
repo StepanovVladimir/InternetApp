@@ -8,9 +8,9 @@ namespace InternetApp.Data.Repositories
 {
     public interface IArticleRepository
     {
-        Article GetArticle(int id);
+        Article GetArticle(int? id);
         List<Article> GetArticles();
-        Task<bool> CreateArticle(Article article);
+        Task<bool> StoreArticle(Article article);
         Task<bool> UpdateArticle(Article article);
         Task<bool> DeleteArticle(int id);
     }

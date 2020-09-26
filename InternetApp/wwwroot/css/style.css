@@ -1,0 +1,12 @@
+﻿.post_image {
+    width: 100%;
+}
+
+.post_btn {
+    float: left;
+    margin-right: 10px;
+}
+
+.clear {
+    clear: both;
+}

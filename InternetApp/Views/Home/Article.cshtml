@@ -1,0 +1,18 @@
+﻿@model Article
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="col-lg-9 col-xl-10">
+    <h1>@Model.Title</h1>
+    <p>@Model.Description</p>
+    <img src="@Model.Image" alt="@Model.Title" class="post_image" />
+    <p>@Model.Content</p>
+    <p>@Model.CreatedAt.ToShortDateString()</p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary post_btn">Редактировать</a>
+    <form asp-action="Delete" asp-route-id="Id" class="post_btn">
+        <input type="submit" value="Удалить" class="btn btn-danger post_delete" />
+    </form>
+    <div class="clear"></div>
+</div>
