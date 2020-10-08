@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Article>
+
+@{
+    ViewData["Title"] = "Научно популярный сайт";
+}
+
+<div class="col-lg-9 col-xl-10">
+    @foreach (var article in Model)
+    {
+        <div class="post">
+            <a asp-action="Show" asp-route-id="@article.Id" class="post_title_link">@article.Title</a>
+            <img src="/Articles/Image/@article.Image" alt="@article.Title" class="post_image" />
+            <p>@article.Description</p>
+            <p class="date">@article.CreatedAt.ToShortDateString()</p>
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@article.Id" class="btn btn-primary post_btn">Редактировать</a>
+                    <form asp-action="Delete" asp-route-id="@article.Id" class="post_btn">
+                        <input type="submit" value="Удалить" class="btn btn-danger post_delete" />
+                    </form>
+                    <div class="clear"></div>
+                }
+            }
+        </div>
+    }
+</div>

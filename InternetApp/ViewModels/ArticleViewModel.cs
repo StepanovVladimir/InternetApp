@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InternetApp.Models
+namespace InternetApp.ViewModels
 {
-    public class Article
+    public class ArticleViewModel
     {
         public int Id { get; set; }
 
@@ -19,10 +20,6 @@ namespace InternetApp.Models
         [Required]
         public string Content { get; set; }
 
-        [Required]
-        public string Image { get; set; }
-
-        [Required]
-        public DateTime CreatedAt { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using InternetApp.Models;
+using InternetApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,8 +12,9 @@ namespace InternetApp.Data.Repositories
     {
         Article GetArticle(int? id);
         List<Article> GetArticles();
-        Task<bool> StoreArticle(Article article);
-        Task<bool> UpdateArticle(Article article);
+        Task<bool> StoreArticle(ArticleViewModel article);
+        Task<bool> UpdateArticle(ArticleViewModel article);
         Task<bool> DeleteArticle(int id);
+        FileStream GetImageStream(string image);
     }
 }

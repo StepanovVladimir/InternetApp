@@ -1,4 +1,26 @@
-﻿.post_image {
+﻿.post {
+    font-family: "Source Sans Pro";
+    margin-bottom: 50px;
+}
+
+.post_title {
+    line-height: 45px;
+    color: rgb(80,106,133);
+}
+
+.post_title_link {
+    line-height: 45px;
+    font-size: 2.25rem;
+    color: rgb(80,106,133);
+    transition: all 0.3s ease;
+}
+
+.post_title_link:hover {
+    color: rgb(0,188,156);
+    text-decoration: none;
+}
+
+.post_image {
     width: 100%;
 }
 
@@ -7,6 +29,30 @@
     margin-right: 10px;
 }
 
+.date {
+    color: rgb(128, 128, 128);
+}
+
 .clear {
     clear: both;
+}
+
+.link {
+    color: rgb(80,106,133);
+    transition: all 0.3s ease;
+}
+
+.link:hover {
+    color: rgb(0,188,156);
+    text-decoration: none;
+}
+
+@media screen and (max-width: 991px) {
+    .post_title {
+        font-size: 1.5rem;
+    }
+
+    .post_title_link {
+        font-size: 1.5rem;
+    }
 }
