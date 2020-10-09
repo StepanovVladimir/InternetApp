@@ -11,24 +11,57 @@ namespace InternetApp.Controllers
 {
     public class AuthController : Controller
     {
+        private UserManager<IdentityUser> _userManager;
         private SignInManager<IdentityUser> _signInManager;
 
-        public AuthController(SignInManager<IdentityUser> signInManager)
+        public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
+            _userManager = userManager;
             _signInManager = signInManager;
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Register(RegisterViewModel registerModel)
+        {
+            if (ModelState.IsValid)
+            {
+                IdentityUser user = new IdentityUser { UserName = registerModel.UserName };
+                IdentityResult registerResult = await _userManager.CreateAsync(user, registerModel.Password);
+                if (registerResult.Succeeded)
+                {
+                    var signInResult = await _signInManager.PasswordSignInAsync(registerModel.UserName, registerModel.Password, false, false);
+                    if (signInResult.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    return RedirectToAction("Login");
+                }
+            }
+            return View(registerModel);
         }
 
         public IActionResult Login()
         {
-            return View(new LoginViewModel());
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginModel)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
-
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View(loginModel);
         }
 
         [Authorize]

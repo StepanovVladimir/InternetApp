@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace InternetApp.Data.FileManagers
 {
-    public class FileManager : IFileManager
+    public class ImagesFileManager : IImagesFileManager
     {
         private string _imagePath;
 
-        public FileManager(IConfiguration config)
+        public ImagesFileManager(IConfiguration config)
         {
             _imagePath = config["Path:Images"];
         }

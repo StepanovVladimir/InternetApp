@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InternetApp.Data.FileManagers
 {
-    public interface IFileManager
+    public interface IImagesFileManager
     {
         FileStream GetImageStream(string image);
         Task<string> SaveImage(IFormFile image);

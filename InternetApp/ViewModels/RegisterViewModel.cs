@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InternetApp.ViewModels
 {
-    public class LoginViewModel
+    public class RegisterViewModel
     {
         [Required]
         public string UserName { get; set; }
@@ -14,5 +14,10 @@ namespace InternetApp.ViewModels
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Required]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        [DataType(DataType.Password)]
+        public string PasswordConfirm { get; set; }
     }
 }

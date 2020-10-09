@@ -42,7 +42,7 @@ namespace InternetApp
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Auth/Login");
 
             services.AddTransient<IArticleRepository, ArticleRepository>();
-            services.AddTransient<IFileManager, FileManager>();
+            services.AddTransient<IImagesFileManager, ImagesFileManager>();
 
             services.AddControllersWithViews();
         }

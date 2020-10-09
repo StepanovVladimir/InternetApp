@@ -12,9 +12,9 @@ namespace InternetApp.Data.Repositories
     public class ArticleRepository : IArticleRepository
     {
         private AppDbContext _context;
-        private IFileManager _fileManager;
+        private IImagesFileManager _fileManager;
 
-        public ArticleRepository(AppDbContext context, IFileManager fileManager)
+        public ArticleRepository(AppDbContext context, IImagesFileManager fileManager)
         {
             _context = context;
             _fileManager = fileManager;
