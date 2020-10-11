@@ -10,7 +10,7 @@
         <div class="post">
             <a asp-action="Show" asp-route-id="@article.Id" class="post_title_link">@article.Title</a>
             <img src="/Articles/Image/@article.Image" alt="@article.Title" class="post_image" />
-            <p>@article.Description</p>
+            @Html.Raw(article.Description)
             <p class="date">@article.CreatedAt.ToShortDateString()</p>
             @if (User.Identity.IsAuthenticated)
             {

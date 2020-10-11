@@ -18,12 +18,12 @@
     </div>
     <div class="form-group">
         <label asp-for="Description" class="control-label">Описание</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
+        <textarea asp-for="Description" id="description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Content" class="control-label">Текст</label>
-        <textarea asp-for="Content" class="form-control"></textarea>
+        <textarea asp-for="Content" id="content" class="form-control"></textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -34,4 +34,9 @@
 @section Scripts
 {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/Trumbowyg-master/dist/trumbowyg.min.js"></script>
+    <script>
+        $("#description").trumbowyg();
+        $("#content").trumbowyg();
+    </script>
 }

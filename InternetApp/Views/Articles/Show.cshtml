@@ -7,9 +7,9 @@
 <div class="col-lg-9 col-xl-10">
     <div class="post">
         <h1 class="post_title">@Model.Title</h1>
-        <p>@Model.Description</p>
+        @Html.Raw(Model.Description)
         <img src="/Articles/Image/@Model.Image" alt="@Model.Title" class="post_image" />
-        <p>@Model.Content</p>
+        @Html.Raw(Model.Content)
         <p class="date">@Model.CreatedAt.ToShortDateString()</p>
         @if (User.Identity.IsAuthenticated)
         {
