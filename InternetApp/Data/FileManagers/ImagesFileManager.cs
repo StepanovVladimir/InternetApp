@@ -43,7 +43,18 @@ namespace InternetApp.Data.FileManagers
 
         public void DeleteImage(string image)
         {
-            File.Delete(Path.Combine(_imagePath, image));
+            try
+            {
+                var file = Path.Combine(_imagePath, image);
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

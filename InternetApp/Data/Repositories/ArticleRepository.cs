@@ -30,7 +30,7 @@ namespace InternetApp.Data.Repositories
             return _context.Articles.OrderByDescending(a => a.CreatedAt).ToList();
         }
 
-        public async Task<bool> StoreArticle(ArticleViewModel viewModel)
+        public async Task<int> StoreArticle(ArticleViewModel viewModel)
         {
             var article = new Article
             {
@@ -46,11 +46,13 @@ namespace InternetApp.Data.Repositories
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return false;
+                return 0;
             }
 
             _context.Add(article);
-            return await SaveChangesAsync();
+            await SaveChangesAsync();
+
+            return article.Id;
         }
 
         public async Task<bool> UpdateArticle(ArticleViewModel viewModel)

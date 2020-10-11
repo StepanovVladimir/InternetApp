@@ -50,9 +50,10 @@ namespace InternetApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (await _repository.StoreArticle(article))
+                int articleId = await _repository.StoreArticle(article);
+                if (articleId != 0)
                 {
-                    return RedirectToAction("Show", new { id = article.Id });
+                    return RedirectToAction("Show", new { id = articleId });
                 }
             }
             return View("Create", article);
