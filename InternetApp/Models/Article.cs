@@ -24,5 +24,7 @@ namespace InternetApp.Models
 
         [Required]
         public DateTime CreatedAt { get; set; }
+
+        public List<Comment> Comments { get; set; }
     }
 }

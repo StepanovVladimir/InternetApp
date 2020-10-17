@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InternetApp.Data;
+using InternetApp.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +23,7 @@ namespace InternetApp
                 var scope = host.Services.CreateScope();
 
                 var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
                 context.Database.EnsureCreated();
@@ -35,7 +36,7 @@ namespace InternetApp
 
                 if (!context.Users.Any(u => u.UserName == "admin"))
                 {
-                    var adminUser = new IdentityUser
+                    var adminUser = new User
                     {
                         UserName = "admin",
                         Email = "admin@mail.com"

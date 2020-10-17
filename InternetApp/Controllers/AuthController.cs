@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InternetApp.Models;
 using InternetApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,10 +12,10 @@ namespace InternetApp.Controllers
 {
     public class AuthController : Controller
     {
-        private UserManager<IdentityUser> _userManager;
-        private SignInManager<IdentityUser> _signInManager;
+        private UserManager<User> _userManager;
+        private SignInManager<User> _signInManager;
 
-        public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -30,7 +31,7 @@ namespace InternetApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityUser user = new IdentityUser { UserName = registerModel.UserName };
+                var user = new User { UserName = registerModel.UserName };
                 IdentityResult registerResult = await _userManager.CreateAsync(user, registerModel.Password);
                 if (registerResult.Succeeded)
                 {
